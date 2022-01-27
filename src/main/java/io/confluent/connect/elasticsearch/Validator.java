@@ -69,7 +69,6 @@ public class Validator {
 
   private static final Logger log = LoggerFactory.getLogger(Validator.class);
 
-  private static final String CONNECTOR_V11_COMPATIBLE_ES_VERSION = "7.0.0";
   private static final String DATA_STREAM_COMPATIBLE_ES_VERSION = "7.9.0";
 
   private ElasticsearchSinkConnectorConfig config;
@@ -349,16 +348,6 @@ public class Validator {
       addErrorMessage(CONNECTION_URL_CONFIG, errorMessage);
       addErrorMessage(DATA_STREAM_TYPE_CONFIG, errorMessage);
       addErrorMessage(DATA_STREAM_DATASET_CONFIG, errorMessage);
-    }
-    if (compareVersions(esVersionNumber, CONNECTOR_V11_COMPATIBLE_ES_VERSION) < 0) {
-      String errorMessage = String.format(
-          "Connector version %s is not compatible with Elasticsearch version %s. Elasticsearch "
-              + "version must be at least %s.",
-          Version.getVersion(),
-          esVersionNumber,
-          CONNECTOR_V11_COMPATIBLE_ES_VERSION
-      );
-      addErrorMessage(CONNECTION_URL_CONFIG, errorMessage);
     }
   }
 
